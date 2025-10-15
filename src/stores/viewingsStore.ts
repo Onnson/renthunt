@@ -176,10 +176,11 @@ export const useViewingsStore = create<ViewingsStore>()(
       },
 
       markSlotBooked: (apartmentId: string, slotId: string) => {
+        const timestamp = slotId.split('_')[1] || '0';
         const slot: TimeSlot = {
           id: slotId,
           apartmentId,
-          dateTime: new Date(parseInt(slotId.split('_')[1])),
+          dateTime: new Date(parseInt(timestamp)),
           duration: 30,
           isAvailable: false,
           isBooked: true,
@@ -263,9 +264,9 @@ export const useViewingsStore = create<ViewingsStore>()(
           slot.apartmentId === apartmentId && slot.isAvailable
         ),
 
-      selectNextAvailableSlot: (apartmentId: string) => {
+      selectNextAvailableSlot: (apartmentId: string): TimeSlot | null => {
         const availableSlots = get().selectAvailableSlotsForApartment(apartmentId);
-        return availableSlots.length > 0 ? availableSlots[0] : null;
+        return availableSlots.length > 0 ? availableSlots[0]! : null;
       },
 
       selectViewingsForMonth: (month: Date) => {

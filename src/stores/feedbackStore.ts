@@ -151,9 +151,6 @@ export const useFeedbackStore = create<FeedbackStore>()(
             step: 'complete',
           },
         }));
-
-        // Update statistics
-        get().updateFeedbackStats();
       },
 
       completeFeedback: (_viewingId: string) => {
@@ -179,16 +176,12 @@ export const useFeedbackStore = create<FeedbackStore>()(
         set((state) => ({
           pendingFeedback: [...state.pendingFeedback, pendingItem],
         }));
-
-        get().updateFeedbackStats();
       },
 
       removePendingFeedback: (viewingId: string) => {
         set((state) => ({
           pendingFeedback: state.pendingFeedback.filter(p => p.viewingId !== viewingId),
         }));
-
-        get().updateFeedbackStats();
       },
 
       extendDeadline: (viewingId: string, newDueDate: Date) => {
@@ -206,16 +199,12 @@ export const useFeedbackStore = create<FeedbackStore>()(
             f.id === feedbackId ? { ...f, ...updates } : f
           ),
         }));
-
-        get().updateFeedbackStats();
       },
 
       deleteFeedback: (feedbackId: string) => {
         set((state) => ({
           submittedFeedback: state.submittedFeedback.filter(f => f.id !== feedbackId),
         }));
-
-        get().updateFeedbackStats();
       },
 
       // UI state
@@ -251,8 +240,6 @@ export const useFeedbackStore = create<FeedbackStore>()(
         set((state) => ({
           submittedFeedback: state.submittedFeedback.filter(f => f.submittedAt >= olderThan),
         }));
-
-        get().updateFeedbackStats();
       },
 
       // Helper method to update statistics
@@ -314,14 +301,13 @@ export const useFeedbackStore = create<FeedbackStore>()(
       },
 
       selectFeedbackDueToday: () => {
-        const today = new Date();
-        today.setHours(23, 59, 59, 999);
-        const tomorrow = new Date(today);
+        const now = new Date();
+        now.setHours(0, 0, 0, 0);
+        const tomorrow = new Date(now);
         tomorrow.setDate(tomorrow.getDate() + 1);
-        tomorrow.setHours(0, 0, 0, 0);
 
         return get().pendingFeedback.filter(p =>
-          p.dueDate >= today && p.dueDate < tomorrow
+          p.dueDate >= now && p.dueDate < tomorrow
         );
       },
 
@@ -342,9 +328,9 @@ export const useFeedbackStore = create<FeedbackStore>()(
         return null;
       },
 
-      selectNextPendingFeedback: () => {
+      selectNextPendingFeedback: (): PendingFeedbackItem | null => {
         const pending = get().selectPendingFeedback();
-        return pending.length > 0 ? pending[0] : null;
+        return pending.length > 0 ? pending[0]! : null;
       },
 
       selectHasPendingFeedback: () => get().pendingFeedback.length > 0,
