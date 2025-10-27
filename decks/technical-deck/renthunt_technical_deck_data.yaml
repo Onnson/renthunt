@@ -1,0 +1,507 @@
+hero:
+  title: RentHunt Technical Development Plan
+  subtitle: 'Comprehensive roadmap for lean team execution: MVP to scale'
+  version: v2.0 - October 2025
+  scope: 12-Month Development & Operations Blueprint
+  team_size: 2-3 person lean startup team
+  budget: $150K-250K annual development costs
+architecture:
+  title: Technical Architecture & Stack Decisions
+  stack_rationale:
+    frontend:
+      framework: React 19 + TypeScript 5.x
+      rationale: React 19 introduces React Compiler for automatic optimization, eliminating
+        manual useMemo/useCallback needs. 15-20% faster rendering vs alternatives.
+      sources:
+      - React 19 performance benchmarks
+      - Frontend Masters Zustand guide
+      - React compiler optimization studies
+      development_time: 3-6 months for moderately complex SPA
+    build_tool:
+      choice: Vite 5.x
+      rationale: 3-5 days faster setup vs Next.js for MVP. Hot reload 10x faster than
+        Create React App.
+      sources:
+      - Vite performance comparisons 2025
+      - React development timeline estimates
+      setup_time: 2-4 hours initial configuration
+    state_management:
+      choice: Zustand 4.x with persist middleware
+      rationale: 4KB bundle size vs Redux 15KB. 3-minute setup time. 85ms average
+        update time vs 220ms traditional React state.
+      sources:
+      - State Management in 2025 performance analysis
+      - Zustand vs Redux benchmarks
+      implementation_effort: 1-2 weeks for 5 stores
+    ui_framework:
+      choice: shadcn/ui + TailwindCSS
+      rationale: Copy-paste components, full ownership. No vendor lock-in. 40% faster
+        styling vs custom CSS.
+      sources:
+      - shadcn/ui adoption statistics
+      - TailwindCSS performance metrics
+      component_library_size: 51 components across atomic design pattern
+    animations:
+      choice: Framer Motion + hover.dev Swipe Cards
+      rationale: Production-tested swipe component saves 4-8 days custom development.
+        Hardware-accelerated 60fps performance.
+      sources:
+      - hover.dev integration case studies
+      - Mobile gesture performance benchmarks
+      integration_time: 3-5 days TypeScript conversion
+team_structure:
+  title: Lean Team Organization & Responsibilities
+  roles:
+  - role: Tech Dev Lead
+    commitment: Full-time (40-50 hrs/week)
+    salary_range: $80K-120K annually
+    responsibilities:
+    - 'Full-stack development: React 19, TypeScript, Zustand implementation'
+    - 'Component architecture: 51 components across atoms/molecules/organisms'
+    - 'State management: 5 Zustand stores with LocalStorage persistence'
+    - 'Testing: >80% coverage with Vitest, E2E testing with Playwright'
+    - 'Deployment: CI/CD with Vercel/Netlify, GitHub Actions'
+    skills_required:
+    - React/TypeScript expertise
+    - Mobile-first development
+    - State management patterns
+    - Testing frameworks
+    timeline_ownership: 'Phases 1-5: Infrastructure → Swipe Core → Polish (12 weeks)'
+  - role: Biz Dev Lead
+    commitment: Full-time (40+ hrs/week)
+    salary_range: $60K-90K + equity
+    responsibilities:
+    - 'Funding: Seed round execution ($500K-1M target)'
+    - 'Partnerships: University tie-ups, landlord acquisition'
+    - 'User acquisition: Beta recruitment (50+ users), Tel Aviv pilot (830 users)'
+    - 'Product validation: User interviews, metrics analysis'
+    - 'Legal/compliance: Israeli rental regulations, user terms'
+    skills_required:
+    - Startup fundraising experience
+    - B2B partnership development
+    - User research methodologies
+    - Israeli market knowledge
+    kpis:
+    - $500K seed raised by Month 3
+    - 50 beta users recruited
+    - 5 landlord partnerships secured
+  - role: Ops Lead
+    commitment: Part-time (20 hrs/week) or contractor
+    cost: $2K-4K monthly (contractor rates)
+    responsibilities:
+    - 'Viewing coordination: Mock scheduling system, real viewing logistics'
+    - 'Customer support: Beta feedback collection, issue resolution'
+    - 'Compliance: Israeli rental laws, data privacy (GDPR/Israeli Privacy Law)'
+    - 'Operations scaling: Rep hiring/training as user base grows'
+    skills_required:
+    - Operations management
+    - Customer support systems
+    - Legal compliance knowledge
+    scaling_plan: Part-time → Full-time at 500+ users → Team of 3-5 at 1000+ users
+  collaboration_tools:
+    code_management: GitHub (private repos, Actions CI/CD)
+    project_tracking: Notion (roadmap, specs), Linear (sprint management)
+    communication: Slack (daily standups), Discord (async discussions)
+    design: Figma (wireframes, component specs)
+    documentation: GitBook or Notion (technical specs, API docs)
+development_phases:
+  title: 12-Week MVP Development Timeline
+  total_effort: 480 hours technical development + 300 hours biz/ops
+  phases:
+  - phase: 'Phase 1: Infrastructure Setup'
+    duration: Weeks 1-2
+    tech_effort: 80 hours
+    deliverables:
+    - Vite + React 19 + TypeScript boilerplate configured
+    - File structure per specifications (src/components/atomic hierarchy)
+    - 5 Zustand stores skeleton with TypeScript interfaces
+    - Mock data generation (10 apartments, 5 personas)
+    - Basic testing setup with Vitest (>80% coverage target)
+    - 12 atom components (Button, Input, etc.) from shadcn/ui
+    biz_parallel:
+    - Business incorporation (Israeli Ltd.)
+    - Seed deck finalization with market research
+    - 'Initial VC outreach (target: 10 meetings)'
+    ops_parallel:
+    - Israeli rental regulation research
+    - Viewing coordination protocol draft
+    - Basic support system setup (Google Forms for beta)
+    risks:
+    - Dependency conflicts
+    - TypeScript configuration issues
+    success_criteria:
+    - Runnable app shell
+    - Mock data persists in LocalStorage
+    - All tests pass
+  - phase: 'Phase 2: Onboarding & Preferences'
+    duration: Weeks 3-5
+    tech_effort: 120 hours
+    deliverables:
+    - 9 onboarding screens with React Router navigation
+    - UserPreferences store fully implemented with validation
+    - 15 molecule components (FormField, LocationSelector, etc.)
+    - 5 organism components (OnboardingHeader, PreferenceSliders)
+    - Form validation and error handling
+    - Framer Motion animations for screen transitions
+    biz_parallel:
+    - User preference validation via 10 interviews
+    - Target persona refinement (roommate seekers focus)
+    - University partnership outreach (Tel Aviv campuses)
+    ops_parallel:
+    - Viewing slot business rules definition
+    - Mock viewing schedule generation
+    - Basic legal terms of service draft
+    success_criteria:
+    - Complete onboarding flow
+    - Preferences persist correctly
+    - Validation works end-to-end
+    user_testing: 5-10 beta testers for onboarding flow validation
+  - phase: 'Phase 3: Discovery & Swipe Core'
+    duration: Weeks 6-8
+    tech_effort: 120 hours
+    deliverables:
+    - hover.dev Swipe Cards integration (TypeScript conversion)
+    - ApartmentCard organism with compatibility scoring
+    - Compatibility algorithm implementation (weighted scoring)
+    - SwipeTemplate and SwipeControls components
+    - Apartments store with filtering and matching logic
+    - 60fps performance optimization for mobile gestures
+    biz_parallel:
+    - 'Beta user recruitment (target: 25 users)'
+    - Compatibility algorithm validation via user feedback
+    - Landlord partnership negotiations (mock data providers)
+    ops_parallel:
+    - 20 viewing slots per apartment mock generation
+    - Viewing coordination workflow testing
+    - Customer support ticket template creation
+    success_criteria:
+    - Functional swipe interface
+    - Compatibility scores accurate
+    - Mobile performance 60fps
+    performance_targets:
+    - <3s initial load
+    - Smooth 60fps animations
+    - Responsive touch gestures
+  - phase: 'Phase 4: Evaluation & Feedback'
+    duration: Weeks 9-10
+    tech_effort: 80 hours
+    deliverables:
+    - Shortlist store and management interface
+    - Detail view with apartment information
+    - Viewing scheduler with calendar integration
+    - Dual feedback system (personal + fairness ratings)
+    - 'End-to-end flow: swipe → shortlist → schedule → feedback'
+    biz_parallel:
+    - 5 mock landlord partnerships secured
+    - Beta user feedback collection and analysis
+    - Seed round pitch preparation (demo ready)
+    ops_parallel:
+    - Viewing logistics testing (mock appointments)
+    - Feedback collection system validation
+    - Support response time benchmarking
+    success_criteria:
+    - Complete user journey functional
+    - Feedback system working
+    - Scheduling logic correct
+  - phase: 'Phase 5: Polish, Testing & Deploy'
+    duration: Weeks 11-12
+    tech_effort: 80 hours
+    deliverables:
+    - Profile and settings management
+    - Bottom navigation and final UX polish
+    - Comprehensive testing suite (unit + integration + E2E)
+    - Production deployment with CI/CD pipeline
+    - Documentation and demo video creation
+    biz_parallel:
+    - Beta launch with 50 initial users
+    - 'Seed funding closure (target: $500K)'
+    - PR and marketing material creation
+    ops_parallel:
+    - Live beta support monitoring
+    - Issue tracking and resolution processes
+    - Scalability planning for user growth
+    success_criteria:
+    - Production-ready MVP
+    - <5 critical bugs
+    - Demo-ready for investors
+    deployment: Vercel with custom domain, SSL, CDN optimization
+component_architecture:
+  title: Component System & Development Estimates
+  methodology: Atomic Design Pattern (Brad Frost)
+  total_components: 51
+  breakdown:
+    atoms:
+      count: 12
+      examples:
+      - Button
+      - Input
+      - Text
+      - Icon
+      - Badge
+      - Spinner
+      development_time: 1-2 hours per component
+      total_effort: 16-24 hours
+      reusability: High - used across all organisms and molecules
+    molecules:
+      count: 15
+      examples:
+      - FormField
+      - CompatibilityBadge
+      - AmenityChip
+      - LocationSelector
+      - BudgetSlider
+      development_time: 2-4 hours per component
+      total_effort: 30-60 hours
+      complexity: Medium - combines atoms with simple logic
+    organisms:
+      count: 18
+      examples:
+      - ApartmentCard
+      - OnboardingHeader
+      - SwipeControls
+      - FeedbackForm
+      - ViewingScheduler
+      development_time: 4-8 hours per component
+      total_effort: 72-144 hours
+      complexity: High - contains business logic and state management
+    templates:
+      count: 4
+      examples:
+      - OnboardingTemplate
+      - SwipeTemplate
+      - DetailTemplate
+      - ListTemplate
+      development_time: 3-6 hours per template
+      total_effort: 12-24 hours
+      purpose: Page layout structure and responsive design
+    pages:
+      count: 16
+      examples:
+      - WelcomeScreen
+      - BudgetScreen
+      - SwipeScreen
+      - ShortlistScreen
+      - ProfileScreen
+      development_time: 2-4 hours per page
+      total_effort: 32-64 hours
+      integration: Combines templates with specific business logic
+  testing_strategy:
+    unit_tests: Every atom and molecule component
+    integration_tests: Organism components with store integration
+    e2e_tests: Complete user flows (onboarding, swipe, scheduling)
+    coverage_target: '>80% code coverage'
+    testing_effort: 25% of development time (~120 hours)
+state_management:
+  title: Zustand Store Architecture & Implementation
+  store_count: 5
+  persistence: LocalStorage with automatic sync
+  performance_benchmarks:
+    bundle_size: 4KB (vs Redux 15KB)
+    setup_time: 3 minutes vs 30+ minutes for Redux
+    update_performance: 85ms average vs 220ms traditional React state
+    memory_usage: +5% over baseline (vs Redux +15%)
+  stores:
+  - name: userPreferencesStore
+    purpose: Onboarding data and user preferences
+    state_size: ~2KB serialized
+    key_actions:
+    - setBudget
+    - setLocation
+    - toggleAmenity
+    - setRoommatePreferences
+    selectors:
+    - selectIsValidForMatching
+    - selectCompatibilityWeights
+    persistence: Critical - survives app restarts
+    implementation_time: 8-12 hours
+    complexity: Medium - validation logic and conditional fields
+  - name: apartmentsStore
+    purpose: Apartment data and filtering logic
+    state_size: ~10KB for 10 apartments
+    key_actions:
+    - loadApartments
+    - calculateCompatibilityScores
+    - addSwipedApartment
+    selectors:
+    - selectFilteredApartments
+    - selectSwipeStack
+    persistence: Optional - can reload from mock data
+    implementation_time: 10-15 hours
+    complexity: High - complex filtering and scoring algorithms
+  - name: shortlistStore
+    purpose: Saved apartments and comparison
+    state_size: ~1KB typical user
+    key_actions:
+    - addToShortlist
+    - removeFromShortlist
+    - updateNotes
+    selectors:
+    - selectShortlistedApartments
+    - selectComparisonData
+    persistence: Critical - user's saved choices
+    implementation_time: 6-8 hours
+    complexity: Low - basic CRUD operations
+  - name: viewingsStore
+    purpose: Viewing scheduling and management
+    state_size: ~2KB typical user
+    key_actions:
+    - scheduleViewing
+    - cancelViewing
+    - updateViewingStatus
+    selectors:
+    - selectUpcomingViewings
+    - selectAvailableSlots
+    persistence: Critical - scheduled appointments
+    implementation_time: 8-12 hours
+    complexity: Medium - business hours logic and availability
+  - name: feedbackStore
+    purpose: Dual ranking system (personal + fairness)
+    state_size: ~1KB per feedback
+    key_actions:
+    - submitFeedback
+    - updatePersonalRating
+    - updateFairnessRating
+    selectors:
+    - selectApartmentFeedback
+    - selectAverageRatings
+    persistence: Important - builds reputation system
+    implementation_time: 6-10 hours
+    complexity: Medium - dual rating calculation and validation
+  total_implementation: 38-57 hours across all stores
+  integration_effort: 15-20 hours connecting stores to components
+technical_risks:
+  title: Risk Assessment & Mitigation Strategies
+  high_risks:
+  - risk: hover.dev Integration Complexity
+    probability: Medium (30%)
+    impact: High - 4-8 days delay
+    mitigation: 'Fallback: Custom swipe component using Framer Motion'
+    buffer_time: 1 week additional development
+    sources:
+    - React gesture library benchmarks
+    - Mobile touch performance studies
+  - risk: React 19 Compatibility Issues
+    probability: Low (15%)
+    impact: Medium - 2-3 days troubleshooting
+    mitigation: Use React 18 stable as fallback, gradual 19 migration
+    testing_strategy: Early compatibility testing with dependencies
+  - risk: Mobile Performance on Low-End Devices
+    probability: Medium (40%)
+    impact: High - User experience degradation
+    mitigation: Progressive enhancement, performance budgets, device testing
+    performance_targets:
+    - 60fps on iPhone 12+
+    - 30fps minimum on budget Android
+  - risk: State Management Complexity at Scale
+    probability: Medium (25%)
+    impact: Medium - Refactoring required
+    mitigation: Start with simple stores, migrate to more sophisticated patterns as
+      needed
+    monitoring: Performance monitoring and state size tracking
+  medium_risks:
+  - risk: TypeScript Configuration Overhead
+    probability: High (60%)
+    impact: Low - Setup delays
+    mitigation: Use proven configurations, shadcn/ui TypeScript templates
+  - risk: Testing Suite Maintenance
+    probability: High (70%)
+    impact: Medium - Development velocity impact
+    mitigation: Focus on critical path testing, automated CI/CD
+  dependencies:
+  - dependency: hover.dev Component Availability
+    criticality: High
+    backup_plan: Custom Framer Motion implementation
+  - dependency: Vercel/Netlify Free Tier Limits
+    criticality: Medium
+    backup_plan: Move to paid tier or AWS S3 + CloudFront
+business_alignment:
+  title: Business-Technical Milestone Synchronization
+  success_metrics:
+    technical:
+    - 80% onboarding completion rate
+    - 20+ swipes per session average
+    - 70% progression to viewing scheduling
+    - 50% feedback submission rate
+    - <3s app load time on mobile
+    - '>80% test coverage maintained'
+    business:
+    - 50 beta users recruited by Month 4
+    - $500K seed funding by Month 3
+    - 5 landlord partnerships secured
+    - 830 users in Tel Aviv pilot by Month 6
+    - $263K revenue projection Year 1
+  integrated_timeline:
+  - month: Month 1-2
+    tech_deliverable: Infrastructure + Onboarding
+    biz_deliverable: Seed pitch + incorporation
+    ops_deliverable: Legal framework + protocols
+    budget_burn: $25K-35K
+    team_focus: Foundation building, investor meetings
+  - month: Month 3-4
+    tech_deliverable: Swipe core + evaluation
+    biz_deliverable: Beta recruitment + user interviews
+    ops_deliverable: Mock viewing system + support setup
+    budget_burn: $35K-50K
+    team_focus: MVP completion, user validation
+  - month: Month 5-6
+    tech_deliverable: Polish + production deployment
+    biz_deliverable: Tel Aviv pilot launch
+    ops_deliverable: Real viewing coordination
+    budget_burn: $40K-60K
+    team_focus: Launch execution, revenue generation
+scaling_plan:
+  title: Post-MVP Technical Scaling Strategy
+  backend_transition:
+    timeline: Months 7-9 (post-seed funding)
+    technology: Node.js + Express + PostgreSQL
+    effort_estimate: 200-300 hours backend development
+    api_design: RESTful APIs with GraphQL consideration for complex queries
+    data_migration: LocalStorage → Database migration tools
+    authentication: Auth0 or NextAuth.js implementation
+  infrastructure_scaling:
+    current_capacity: 1000 concurrent users on Vercel free tier
+    scaling_targets:
+    - '5K users: Vercel Pro ($20/month)'
+    - '20K users: AWS/GCP migration'
+    - '100K users: CDN + load balancing'
+    monitoring: Vercel Analytics, Sentry error tracking, performance monitoring
+    cost_projections:
+    - '0-1K users: $0/month'
+    - '1K-5K users: $50/month'
+    - '5K-20K users: $200-500/month'
+  team_scaling:
+    month_6_hiring: 1 additional frontend developer
+    month_9_hiring: Backend developer, DevOps engineer
+    month_12_hiring: Mobile developer (React Native), UI/UX designer
+    remote_vs_local: Israeli developers preferred for legal/market knowledge, remote
+      OK for specialized skills
+resource_requirements:
+  title: Development Resources & Budget Breakdown
+  hardware_requirements:
+    development_machines:
+    - MacBook Pro M2+ for iOS testing
+    - High-end Windows/Linux for Android testing
+    mobile_testing:
+    - iPhone 12+ (iOS Safari)
+    - Samsung Galaxy S22+ (Chrome Android)
+    - Budget Android device for performance testing
+    cost: $3K-5K one-time hardware investment
+  software_tools:
+    development:
+    - VS Code + extensions (free)
+    - GitHub Copilot ($10/month/developer)
+    - Figma Pro ($15/month)
+    - Vercel Pro ($20/month after free tier)
+    project_management:
+    - Notion Pro ($10/month/user)
+    - Linear ($8/month/user)
+    - Slack Pro ($7.25/month/user)
+    monthly_recurring: $100-150/month for 3-person team
+  annual_budget_breakdown:
+    salaries: $150K-210K (60% of total budget)
+    hardware_equipment: $5K-8K (2% of total)
+    software_tools: $2K-3K (1% of total)
+    marketing_user_acquisition: $50K-75K (20-25% of total)
+    legal_compliance: $10K-20K (4-6% of total)
+    contingency_buffer: $25K-40K (10-15% of total)
+    total_annual: $242K-356K for complete operation
